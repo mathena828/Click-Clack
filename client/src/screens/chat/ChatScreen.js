@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ChannelList from './ChannelList'
 import MessagesPanel from "./MessagesPanel";
 import './chat.scss';
-const SERVER = "http://localhost:5000/";
+const SERVER = "http://localhost:5000";
 const ChatScreen = ()=> {
     
     useEffect(()=>{
@@ -15,9 +15,9 @@ const ChatScreen = ()=> {
         participants:10
     }])
     const loadChannels = async() =>{
-        fetch(SERVER+'getChannels').then(async response=>{
+        fetch(SERVER+'/getChannels').then(async response=>{
             let data = await response.json();
-            setChannels({channels: data.channels})
+            setChannels(data.channels)
         })
     }
     const handleChannelSelect = id =>{

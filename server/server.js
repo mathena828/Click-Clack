@@ -29,6 +29,16 @@ app.get("/", (req, res, next) => {
 
 
 //app.use('/', router);
+const STATIC_CHANNELS = [{
+  id:1,
+  name: 'first',
+  participants:10
+},
+{
+  id:2,
+  name: 'second',
+  participants:1
+}];
 app.use('/api/users', userRouter);
 app.get('/getChannels',(req,res)=>{
   res.json({
