@@ -7,9 +7,12 @@ const http = require('http');
 const app = express();
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
-const router = require('./routes/index');
+
 var logger = require('morgan');
 var cors = require('cors');
+
+const router = require('./routes/index');
+const userRouter = require('./routes/users');
 
 connectDB();
 app.use(express.json());
@@ -25,7 +28,8 @@ app.get("/", (req, res, next) => {
 });
 
 
-app.use('/', router);
+//app.use('/', router);
+app.use('/api/users', userRouter);
 app.get('/getChannels',(req,res)=>{
   res.json({
     channels: STATIC_CHANNELS
