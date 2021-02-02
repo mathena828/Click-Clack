@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {Form, Button, Alert} from 'react-bootstrap'
-
+const urlLink = "http://localhost:5000";
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ const RegisterScreen = ({ history }) => {
     };
     try {
       const { data } = await axios.post(
-        "/api/users/register",
+        urlLink + "/api/users/register",
         {
           username,
           email,
