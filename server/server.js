@@ -13,7 +13,6 @@ var cors = require('cors');
 
 connectDB();
 app.use(express.json());
-app
 
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
@@ -27,19 +26,38 @@ app.get("/", (req, res, next) => {
 
 
 app.use('/', router);
+app.get('/getChannels',(req,res)=>{
+  res.json({
+    channels: STATIC_CHANNELS
+  })
+})
 //app.use('api/chat', require('./routes/chat')); 
 /* app.post('api/users/login', userRouter.login)
 app.post('api/users/register', userRouter.register) */
 
 app.use(errorHandler);
 
-
+/* app.use(cors({credentials: true, origin: 'http://localhost:5000'}));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  next();
+}); */
 
 const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: false
+  }
+});
+
 io.on('connection', (socket) => {
   console.log('Connected');
+  socket.emit('connection',null);
   socket.on('join', ({username, room}, callback) => {
     console.log(username, room);
   });
