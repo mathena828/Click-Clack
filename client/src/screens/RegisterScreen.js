@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import {Form, Button, Alert} from 'react-bootstrap'
 
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -16,16 +17,14 @@ const RegisterScreen = ({ history }) => {
 
   const registerHandler = async (e) => {
     e.preventDefault();
-
     const config = {
       header: {
         "Content-Type": "application/json",
       },
     };
-
     try {
       const { data } = await axios.post(
-        "/api/auth/register",
+        "/api/users/register",
         {
           username,
           email,
@@ -33,7 +32,6 @@ const RegisterScreen = ({ history }) => {
         },
         config
       );
-
       localStorage.setItem("authToken", data.token);
       history.push("/");
     } catch (error) {
@@ -46,6 +44,32 @@ const RegisterScreen = ({ history }) => {
 
   return (
     <div>
+      {error && <Alert variant="danger">
+          {error}
+      </Alert> }
+      <Form onSubmit={registerHandler}>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}
+            value={username}/>
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}
+            value={email}/>
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}
+            value={password}/>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Register
+        </Button>
+      </Form>
+      <span>
+          Already have an account? <Link to="/login">Login</Link>
+      </span>
     </div>
   );
 };
