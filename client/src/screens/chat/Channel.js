@@ -1,11 +1,13 @@
 import React from 'react';
 
-const Channel = (props) =>{
-    console.log(props);
+const Channel = ({id,name,participants,onClick}) =>{
+    const isClicked = () =>{
+        onClick(id)
+    }
     return(
-        <div className="channel-item">
-            <div>{props.name}</div>
-            <span>{props.participants}</span>
+        <div className="channel-item" onClick={isClicked}>
+            <div>{name}</div>
+            <span>{participants}</span>
         </div>
     );
 }

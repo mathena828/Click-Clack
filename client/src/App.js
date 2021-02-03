@@ -4,15 +4,7 @@ import LoginScreen from "./screens/LoginScreen"
 import RegisterScreen from "./screens/RegisterScreen"
 import HomeScreen from "./screens/HomeScreen"
 import ChatScreen from "./screens/chat/ChatScreen"
-import socketClient  from "socket.io-client";
-const SERVER = "http://localhost:5000/";
 const App = () => {
-  var socket = socketClient(SERVER,{
-    withCredentials: false,
-});
-  socket.on('connection', () => {
-      console.log(`I'm connected with the back-end`);
-  });
   return (
       <Router>
         <div className="App">

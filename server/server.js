@@ -32,12 +32,14 @@ app.get("/", (req, res, next) => {
 const STATIC_CHANNELS = [{
   id:1,
   name: 'first',
-  participants:10
+  participants:10,
+  sockets:[]
 },
 {
   id:2,
   name: 'second',
-  participants:1
+  participants:1,
+  sockets:[]
 }];
 app.use('/api/users', userRouter);
 app.get('/getChannels',(req,res)=>{
@@ -50,14 +52,6 @@ app.get('/getChannels',(req,res)=>{
 app.post('api/users/register', userRouter.register) */
 
 app.use(errorHandler);
-
-/* app.use(cors({credentials: true, origin: 'http://localhost:5000'}));
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-  next();
-}); */
 
 const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
@@ -72,11 +66,46 @@ const io = socketio(server,{
 io.on('connection', (socket) => {
   console.log('Connected');
   socket.emit('connection',null);
+  socket.on('channel-join',id=>{
+    console.log("channel-join",id);
+    STATIC_CHANNELS.forEach(c=>{
+      if (c.id === id) {
+        if (c.sockets.indexOf(socket.id) == -1) {
+            c.sockets.push(socket.id);
+            c.participants++;
+            //console.log("same id",c);
+            io.emit('channel', c);
+        }
+    } else {
+      
+        let index = c.sockets.indexOf(socket.id);
+        // i
+        if (index != -1) {
+            console.log("left channel", c);
+            c.sockets.splice(index, 1);
+            c.participants--;
+            //console.log("dif id",c)
+            io.emit('channel', c);
+        }
+    }
+    
+    });
+    console.log(STATIC_CHANNELS);
+    return id;
+  })
   socket.on('join', ({username, room}, callback) => {
     console.log(username, room);
   });
   socket.on('disconnect', () => {
     console.log("Disconnected");
+    STATIC_CHANNELS.forEach(c=>{
+      let index = c.sockets.indexOf(socket.id);
+      if (index != (-1)){
+        c.sockets.splice(index,1);
+        c.participants--;
+        io.emit('channel',c)
+      }
+    })
   })
 });
 server.listen(PORT, () =>
