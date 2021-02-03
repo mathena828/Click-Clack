@@ -5,7 +5,7 @@ import MessagesPanel from "./MessagesPanel";
 import './chat.scss';
 import socketClient  from "socket.io-client";
 const SERVER = "http://localhost:5000";
-var socket = socketClient(SERVER);
+const socket = socketClient(SERVER);
 
 const ChatScreen = ()=> {
 
@@ -30,30 +30,45 @@ const ChatScreen = ()=> {
                 handleChannelSelect(channel.id);
             }
         });
-        socket.on('channel', channel => {
-            //console.log("channel",channel);
+        socket.on('channels', channels => {
 
-            let channelsList =  [...channels];
-            //console.log("channels",channels);
-            //console.log("channelsList",channels)
+           /*  const channelsList =  [...channels];
+            console.log("channels",channels);
+            console.log("channelsList",channelsList)
             channelsList.forEach(c => {
                 if (c.id === channel.id) {
                     c.participants = channel.participants;
                 }
+            }); */
+            setChannels(channels);
+        });
+        socket.on('message',message=>{
+            let channelsList =  [...channels];
+            channelsList.forEach(c => {
+                if (c.id === message.channel_id) {
+                    if (!c.messages) {
+                        c.messages = [message];
+                    } else {
+                        c.messages.push(message);
+                    }
+                }
             });
             setChannels(channelsList);
-        });
+        })
+    }
+    const handleSendMessage = (channel_id, text) => {
+        console.log(channel_id,text);
+        socket.emit('send-message', { channel_id, text, senderName: socket.id, id: Date.now() });
     }
     const handleChannelSelect = (id) =>{
-        console.log(channels);
+        console.log("Joined channel", id);
         let channel = channels.find(c=>{
             return c.id === id
         });
-        
+        setChannel(channel);
         socket.emit('channel-join', id, ack=>{
         })
-        setChannel(channel);
-        console.log(channel)
+        
     }
     useEffect(()=>{
         loadChannels();
@@ -63,7 +78,7 @@ const ChatScreen = ()=> {
     return (
         <div className="chat-app">
             <ChannelList channels={channels} onSelectChannel={handleChannelSelect}/>
-            <MessagesPanel/>
+            <MessagesPanel onSendMessage={handleSendMessage} channel={channel}/>
         </div>
     )
 }

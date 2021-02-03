@@ -74,38 +74,44 @@ io.on('connection', (socket) => {
             c.sockets.push(socket.id);
             c.participants++;
             //console.log("same id",c);
-            io.emit('channel', c);
+            //io.emit('channel', c);
+           // console.log("emit-channel",c)
         }
     } else {
       
         let index = c.sockets.indexOf(socket.id);
-        // i
         if (index != -1) {
-            console.log("left channel", c);
             c.sockets.splice(index, 1);
             c.participants--;
             //console.log("dif id",c)
-            io.emit('channel', c);
+            //io.emit('channel', c);
+            //console.log("emit-channel",c)
         }
     }
-    
-    });
+    io.emit('channels',STATIC_CHANNELS);
     console.log(STATIC_CHANNELS);
+    });
+    
     return id;
   })
   socket.on('join', ({username, room}, callback) => {
     console.log(username, room);
   });
+  socket.on('send-message', message => {
+    console.log(message);
+    //io.emit('message', message);
+  });
   socket.on('disconnect', () => {
-    console.log("Disconnected");
+    console.log("Disconnected", socket.id);
     STATIC_CHANNELS.forEach(c=>{
       let index = c.sockets.indexOf(socket.id);
       if (index != (-1)){
         c.sockets.splice(index,1);
         c.participants--;
-        io.emit('channel',c)
+        
       }
-    })
+    });
+    io.emit('channels',STATIC_CHANNELS);
   })
 });
 server.listen(PORT, () =>

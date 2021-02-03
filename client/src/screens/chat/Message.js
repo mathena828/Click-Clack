@@ -1,10 +1,10 @@
-const Message = (props) => {
+const Message = ({id, senderName, text}) => {
     return (
-        <div classname="message-item">
+        <div className="message-item">
 ‍
-            <div><b>{props.senderName}</b></div>
+            <div><b>{senderName}</b></div>
 ‍
-            <span>{props.text}</span>
+            <span>{text}</span>
 ‍       </div>
         
     )
