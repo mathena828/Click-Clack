@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {Form, Button, Alert} from 'react-bootstrap'
-const urlLink = "http://localhost:5000";
+import { UserContext } from "../App";
+
+const server = "http://localhost:5000";
+
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const [, setUser] = useContext(UserContext);
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -25,17 +30,22 @@ const LoginScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        urlLink + "/api/users/login",
+        server + "/api/users/login",
         { email, password },
         config
       );
       localStorage.setItem("authToken", data.token);
+      setUser(data.user);
       history.push("/");
     } catch (error) {
-      setError(error.response.data.error);
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+      if (error.response.data || error.response) {
+        setError(error.response.data.error);
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      } else {
+        console.log(error);
+      }
     }
   };
 

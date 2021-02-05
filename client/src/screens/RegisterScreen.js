@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {Form, Button, Alert} from 'react-bootstrap'
-const urlLink = "http://localhost:5000";
+import { UserContext } from "../App";
+
+const server = "http://localhost:5000";
+
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const [, setUser] = useContext(UserContext);
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -24,7 +29,7 @@ const RegisterScreen = ({ history }) => {
     };
     try {
       const { data } = await axios.post(
-        urlLink + "/api/users/register",
+        server + "/api/users/register",
         {
           username,
           email,
@@ -33,6 +38,7 @@ const RegisterScreen = ({ history }) => {
         config
       );
       localStorage.setItem("authToken", data.token);
+      setUser(data.user);
       history.push("/");
     } catch (error) {
       setError(error.response.data.error);

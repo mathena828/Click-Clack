@@ -1,7 +1,7 @@
 const HomeScreen = ({ history }) => {
   return (
     <div>
-      <h1>Homepage</h1>
+      <h1>Home</h1>
     </div>
   );
 };

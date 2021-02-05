@@ -8,8 +8,7 @@ const SERVER = "http://localhost:5000";
 const socket = socketClient(SERVER);
 
 const ChatScreen = ()=> {
-
-    const [channels,setChannels] = useState([{
+    const [channels, setChannels] = useState([{
         id:1,
         name: 'test',
         participants:10

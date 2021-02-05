@@ -2,12 +2,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
 
 const controller = {
-    test: async(req,res,next)=>{
-        return res.status(200).json({
-            message: "Test Success"
-        })
-    },
-    register:async(req, res, next) => {
+    register: async(req, res, next) => {
         const { username, email, password } = req.body;
         var isTeacher = false
         console.log(req.body)
@@ -19,7 +14,7 @@ const controller = {
                 isTeacher,
             })
             var token = sendToken(user, 200);
-            return res.status(200).json({ success: true, token });
+            return res.status(200).json({ success: true, token, user });
         } catch (error) {
             next(error);
         }    
@@ -38,12 +33,12 @@ const controller = {
             if (!isMatch) {
                 return next(new ErrorResponse("Invalid Credentials", 401));
             }
-            sendToken(user, 200);
+            var token = sendToken(user, 200);
+            return res.status(200).json({ success: true, token, user });
         } catch (error) {
             next(error);
         }
     }
-    
 }
 const sendToken = (user, statusCode) => {
     const token = user.getSignedJwtToken();
