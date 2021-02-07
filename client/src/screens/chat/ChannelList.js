@@ -8,7 +8,7 @@ const ChannelList = ({channels, onSelectChannel}) =>{
     }
     let list = "There are no channels";
     if(channels){
-        list = channels.map(c=><Channel key={c.id} id={c.id} name={c.name} participants={c.participants} onClick={handleClick}/>);
+        list = channels.map(c=><Channel key={c._id} id={c._id} name={c.name} participants={c.participants} onClick={handleClick}/>);
     }
     return(
         <div>

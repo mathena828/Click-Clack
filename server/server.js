@@ -41,12 +41,12 @@ const STATIC_CHANNELS = [{
 }];
 app.use('/api/users', userRouter);
 app.use('/api/chat', chatRouter);
-
+/* 
 app.get('/getChannels',(req,res)=>{
   res.json({
     channels: STATIC_CHANNELS
   })
-})
+}) */
 
 app.use(errorHandler);
 

@@ -1,5 +1,6 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../App";
 import ChannelList from './ChannelList'
 import MessagesPanel from "./MessagesPanel";
 import './chat.scss';
@@ -8,15 +9,14 @@ const SERVER = "http://localhost:5000";
 const socket = socketClient(SERVER);
 
 const ChatScreen = ()=> {
-    const [channels, setChannels] = useState([{
-        id:1,
-        name: 'test',
-        participants:10
-    }])
+    const [channels, setChannels] = useState([])
     const [channel, setChannel] = useState(null);
+    const [messages, setMessages] = useState([]);
+    const user = useContext(UserContext);
     const loadChannels = async() =>{
-        fetch(SERVER+'/getChannels').then(async response=>{
+        fetch(SERVER+'/api/chat/channels').then(async response=>{
             let data = await response.json();
+            console.log(data);
             setChannels(data.channels)
         })
     }
@@ -24,25 +24,13 @@ const ChatScreen = ()=> {
         
         console.log("socket configs running");
         socket.on('connection',()=>{
-            console.log("id",socket.id);
-            if (channel){
-                handleChannelSelect(channel.id);
-            }
+            console.log("connected id",socket.id);
         });
         socket.on('channels', channels => {
-
-           /*  const channelsList =  [...channels];
-            console.log("channels",channels);
-            console.log("channelsList",channelsList)
-            channelsList.forEach(c => {
-                if (c.id === channel.id) {
-                    c.participants = channel.participants;
-                }
-            }); */
             setChannels(channels);
         });
         socket.on('message',message=>{
-            let channelsList =  [...channels];
+            /* let channelsList =  [...channels];
             channelsList.forEach(c => {
                 if (c.id === message.channel_id) {
                     if (!c.messages) {
@@ -52,21 +40,35 @@ const ChatScreen = ()=> {
                     }
                 }
             });
-            setChannels(channelsList);
+            setChannels(channelsList); */
         })
     }
     const handleSendMessage = (channel_id, text) => {
         console.log(channel_id,text);
-        socket.emit('send-message', { channel_id, text, senderName: socket.id, id: Date.now() });
+        console.log("user",user);
+        var body = {
+            userName: user[0].username,
+            content: text,
+            channelId: channel_id,
+        } 
+        //socket.emit('send-message', { channel_id, text, senderName: socket.id, id: Date.now() });
+        fetch(SERVER+'/api/chat/channels/'+channel_id,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
     }
     const handleChannelSelect = (id) =>{
         console.log("Joined channel", id);
-        let channel = channels.find(c=>{
-            return c.id === id
+        fetch(SERVER+'/api/chat/channels/'+id).then(async response=>{
+            let data = await response.json();
+            setMessages(data.messages);
+            console.log(data.messages);
+            setChannel(id)
+            //setChannels(data.channels)
         });
-        setChannel(channel);
-        socket.emit('channel-join', id, ack=>{
-        })
         
     }
     useEffect(()=>{
@@ -77,7 +79,7 @@ const ChatScreen = ()=> {
     return (
         <div className="chat-app">
             <ChannelList channels={channels} onSelectChannel={handleChannelSelect}/>
-            <MessagesPanel onSendMessage={handleSendMessage} channel={channel}/>
+            <MessagesPanel onSendMessage={handleSendMessage} messages={messages} channelId={channel}/>
         </div>
     )
 }

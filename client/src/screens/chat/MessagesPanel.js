@@ -1,10 +1,10 @@
 import {useState} from "react";
 import Message from './Message';
-const MessagesPanel = ({onSendMessage, channel}) => {
+const MessagesPanel = ({onSendMessage, messages, channelId}) => {
     const [input,setInput] = useState('');
     let list = <div>There are no messages shown</div>;
-    if (channel && channel.messages) {
-        list = channel.messages.map(m => <Message key={m.id} id={m.id} senderName={m.senderName} text={m.text} />);
+    if (messages) {
+        list = messages.map(m => <Message key={m._id} id={m._id} senderName={m.userName} text={m.content} />);
     }
     //console.log(props);
     const handleInput=(e)=>{
@@ -13,7 +13,7 @@ const MessagesPanel = ({onSendMessage, channel}) => {
     const send=()=>{
         console.log(input);
         if(input && input!=''){
-            onSendMessage(channel.id, input);
+            onSendMessage(channelId, input);
             setInput('');
         }
     }
