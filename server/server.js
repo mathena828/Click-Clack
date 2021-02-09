@@ -9,14 +9,20 @@ const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 
 
+const Socket = require('./socket');
+const server = http.createServer(app);
+var socket = Socket(server);
+
+const chatController=require('./controllers/chat')(socket);
+
 
 var logger = require('morgan');
 var cors = require('cors');
 
-app.use(cors());
+app.use(cors({credentials: false, origin: '*'}));
 app.options('*', cors());
 
-const chatRouter = require('./routes/chat');
+const chatRouter = require('./routes/chat')(chatController);
 const userRouter = require('./routes/users');
 
 connectDB();
@@ -27,31 +33,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const STATIC_CHANNELS = [{
-  id:1,
-  name: 'first',
-  participants:10,
-  sockets:[]
-},
-{
-  id:2,
-  name: 'second',
-  participants:1,
-  sockets:[]
-}];
 app.use('/api/users', userRouter);
 app.use('/api/chat', chatRouter);
-/* 
-app.get('/getChannels',(req,res)=>{
-  res.json({
-    channels: STATIC_CHANNELS
-  })
-}) */
 
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-const server = http.createServer(app);
+
+/* 
 const io = socketio(server, {
   cors: {
     origin: "*",
@@ -96,7 +85,6 @@ io.on('connection', (socket) => {
   });
   socket.on('send-message', message => {
     console.log(message);
-    //io.emit('message', message);
   });
   socket.on('disconnect', () => {
     console.log("Disconnected", socket.id);
@@ -110,7 +98,7 @@ io.on('connection', (socket) => {
     });
     io.emit('channels', STATIC_CHANNELS);
   })
-});
+}); */
 
 server.listen(PORT, () =>
   console.log(`Sever is running on port ${PORT}`)
