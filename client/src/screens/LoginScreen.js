@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext} from "react";
+import { useCookies } from 'react-cookie';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {Form, Button, Alert} from 'react-bootstrap'
@@ -10,6 +11,7 @@ const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [cookies, setCookie] = useCookies(['user']);
 
   const [, setUser] = useContext(UserContext);
 
@@ -36,6 +38,7 @@ const LoginScreen = ({ history }) => {
       );
       localStorage.setItem("authToken", data.token);
       setUser(data.user);
+      setCookie('user', data.user, { path: '/' });
       history.push("/");
     } catch (error) {
       if (error.response.data || error.response) {

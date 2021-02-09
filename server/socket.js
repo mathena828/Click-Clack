@@ -16,16 +16,19 @@ const Socket = (server)=>{
         })
         socket.emit('test', "hellooo");
         var previousId;
-/*         const safeJoin = (currentId)=>{
+        const safeJoin = (currentId)=>{
             socket.leave(previousId);
             socket.join(currentId);
             previousId=currentId;
         };
-        socket.on('getRoom',(roomId)=>{
-            safeJoin(roomId);
-            console.log("joining room " + roomId);
-            socket.emit('room',roomId);
+        socket.on('getChannel',(data)=>{
+            console.log(data);
+            safeJoin(data.channelId);
+            console.log("joining channel " + data.channelId);
+            socket.emit('room',data.channelId);
         });
+/*         
+        
         socket.on('typing', (data) => {
             //console.log(data);
             socket.broadcast.in(data.room_id).emit('typing', {data: data, isTyping: true});

@@ -1,5 +1,6 @@
 
 import { useEffect, useState, useContext } from "react";
+import { useCookies } from 'react-cookie';
 import { UserContext } from "../../App";
 import ChannelList from './ChannelList'
 import MessagesPanel from "./MessagesPanel";
@@ -12,7 +13,8 @@ const ChatScreen = ()=> {
     const [channels, setChannels] = useState([])
     const [channel, setChannel] = useState(null);
     const [messages, setMessages] = useState([]);
-    const user = useContext(UserContext);
+    const [cookies, setCookie] = useCookies(['user']);
+    
     const loadChannels = async() =>{
         fetch(SERVER+'/api/chat/channels').then(async response=>{
             let data = await response.json();
@@ -26,28 +28,21 @@ const ChatScreen = ()=> {
         socket.on('connection',()=>{
             console.log("connected id",socket.id);
         });
-        socket.on('channels', channels => {
+        /* socket.on('channels', channels => {
             setChannels(channels);
-        });
-        socket.on('message',message=>{
-            /* let channelsList =  [...channels];
-            channelsList.forEach(c => {
-                if (c.id === message.channel_id) {
-                    if (!c.messages) {
-                        c.messages = [message];
-                    } else {
-                        c.messages.push(message);
-                    }
-                }
-            });
-            setChannels(channelsList); */
+        }); */
+        socket.on('newMessage',async data=>{
+            let message = await data;
+            setMessages(oldMessages => [...oldMessages, message]);
+            setChannels(channelsList); 
         })
     }
     const handleSendMessage = (channel_id, text) => {
         console.log(channel_id,text);
-        console.log("user",user);
+        
+        console.log(cookies.user);
         var body = {
-            userName: user[0].username,
+            userName: cookies.user.username,
             content: text,
             channelId: channel_id,
         } 
@@ -67,6 +62,7 @@ const ChatScreen = ()=> {
             setMessages(data.messages);
             console.log(data.messages);
             setChannel(id)
+            socket.emit('getChannel',{channelId:id})
             //setChannels(data.channels)
         });
         
@@ -74,6 +70,7 @@ const ChatScreen = ()=> {
     useEffect(()=>{
         loadChannels();
         configureSocket();
+        console.log(JSON.stringify(cookies));
     },[])
     
     return (

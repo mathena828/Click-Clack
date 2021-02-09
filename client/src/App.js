@@ -1,6 +1,6 @@
-import { useState, createContext} from "react";
+import { useState, createContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { Container } from "react-bootstrap";
+import { CookiesProvider } from 'react-cookie';
 import PrivateRoute from "./components/PrivateRoute"
 import LoginScreen from "./screens/LoginScreen"
 import RegisterScreen from "./screens/RegisterScreen"
@@ -15,21 +15,21 @@ export const UserContext = createContext();
 const App = () => {
   const userState = useState(null);
   return (
+    <CookiesProvider>
       <Router>
-        <div className="App">
-          <UserContext.Provider value={userState}>
-            <NavigationBar></NavigationBar>
-            <Switch>
-              <Route exact path="/" component={HomeScreen} />
-              <Route  path="/register" component={RegisterScreen} />
-              <Route path="/login" component={LoginScreen} />
-              <PrivateRoute path="/chat" component={ChatScreen}/>
-              <PrivateRoute path="/profile" component={ProfileScreen}/>
-              <PrivateRoute path="/join" component={JoinScreen}/>
-            </Switch>
-          </UserContext.Provider>
-        </div>
+        <UserContext.Provider value={userState}>
+          <NavigationBar></NavigationBar>
+          <Switch>
+            <Route exact path="/" component={HomeScreen} />
+            <Route path="/register" component={RegisterScreen} />
+            <Route path="/login" component={LoginScreen} />
+            <PrivateRoute path="/chat" component={ChatScreen} />
+            <PrivateRoute path="/profile" component={ProfileScreen} />
+            <PrivateRoute path="/join" component={JoinScreen} />
+          </Switch>
+        </UserContext.Provider>
       </Router>
+    </CookiesProvider>
   );
 };
 
