@@ -1,6 +1,7 @@
 import { useState, createContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { CookiesProvider } from 'react-cookie';
+
 import PrivateRoute from "./components/PrivateRoute"
 import LoginScreen from "./screens/LoginScreen"
 import RegisterScreen from "./screens/RegisterScreen"

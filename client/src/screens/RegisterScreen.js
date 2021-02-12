@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {Form, Button, Alert} from 'react-bootstrap'
+import {Form, Button, Alert, Container} from 'react-bootstrap'
 import { UserContext } from "../App";
 
 const server = "http://localhost:5000";
@@ -49,7 +49,17 @@ const RegisterScreen = ({ history }) => {
   };
 
   return (
-    <div>
+    <Container fluid className="p-5">
+       <h1>Get Started
+        <span>
+            <img  
+            width={50}
+            height={50}
+            className="ml-2 mb-2"
+            src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/rocket_1f680.png" 
+            alt="hello"/>
+        </span> </h1>
+      <h5 className="mb-4">Create an account to join the <b className="underline-black">dialogue</b> and shape the future one message at a time.</h5>
       {error && <Alert variant="danger">
           {error}
       </Alert> }
@@ -69,14 +79,15 @@ const RegisterScreen = ({ history }) => {
           <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}
             value={password}/>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button type="submit">
           Register
         </Button>
       </Form>
+      <hr></hr>
       <span>
-          Already have an account? <Link to="/login">Login</Link>
+          Already have an account? <Link to="/login">Sign In</Link>
       </span>
-    </div>
+    </Container>
   );
 };
 

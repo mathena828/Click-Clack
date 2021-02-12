@@ -12,6 +12,7 @@
     "node-sass": "4.14.1",
     "query-string": "^6.13.8",
     "react": "^17.0.1",
+    "react-apple-emojis": "^1.1.1",
     "react-bootstrap": "^1.4.3",
     "react-cookie": "^4.0.3",
     "react-dom": "^17.0.1",

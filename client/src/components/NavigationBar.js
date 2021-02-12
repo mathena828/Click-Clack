@@ -1,12 +1,13 @@
 import React, {useContext} from "react";
-import {Navbar, Nav} from 'react-bootstrap'
-import {LinkContainer} from 'react-router-bootstrap'
 import { UserContext } from "../App";
+
+import {Navbar, Nav, Button} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
 
 
 const NavigationBar = () => {
 
-  const [user, setUser] = useContext(UserContext);
+  const [, setUser] = useContext(UserContext);
 
   const logoutHandler = () => {
       setUser(null);
@@ -17,7 +18,7 @@ const NavigationBar = () => {
     <React.Fragment>
       <Navbar bg="light" variant="light">
           <LinkContainer to="/">
-            <Navbar.Brand>Hello World</Navbar.Brand>
+            <Navbar.Brand>Click<span className="orange-text">Clack</span></Navbar.Brand>
           </LinkContainer>
           <Nav className="mr-auto">
               <LinkContainer to="/">
@@ -42,12 +43,13 @@ const NavigationBar = () => {
               </Nav>
             ) : (
               <Nav className="ml-auto">
+                 <LinkContainer to="/login">
+                  <Button className="mr-2" variant="dark">Login</Button>
+                </LinkContainer>
                 <LinkContainer to="/register">
-                  <Nav.Link>Register</Nav.Link>
+                  <Button variant="secondary">Register</Button>
                 </LinkContainer>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
+               
               </Nav>
             )
           }    
