@@ -1,5 +1,14 @@
 const express = require("express");
-const chatRouter = express.Router();
-const { protect } = require("../middleware/auth");
+const chatIndex = function (chatController) {
 
-module.exports = chatRouter;
+
+    const chatRouter = express.Router();
+    const { protect } = require("../middleware/auth");
+
+    chatRouter.route("/channels").get(chatController.getChannels, protect);
+    chatRouter.route("/channels").post(chatController.postChannel, protect);
+    chatRouter.route("/channels/:channelId").get(chatController.getChannel, protect);
+    chatRouter.route("/channels/:channelId").post(chatController.postMessage, protect);
+    return chatRouter;
+}
+module.exports = chatIndex;
