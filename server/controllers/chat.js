@@ -11,7 +11,6 @@ const chatController = (socket) => {
         },
         getUserChannels: async (req, res, next) => {
             const channels = await Channel.find({ participants: { $all: [req.params.userId] } })
-           
             return res.status(200).json({ success: true, channels });
 
         },
@@ -22,6 +21,24 @@ const chatController = (socket) => {
             console.log(messages)
             return res.status(200).json({ success: true, messages });
 
+        },
+        joinChannel: async (req,res,next)=>{
+            try{
+                var channel = await Channel.findOne({_id: req.body.channelId});
+                if(!channel){
+                    return next(new ErrorResponse("Channel not found", 401));
+                }else{
+                    channel.participants.push(req.body.userId);
+                    channel.save();
+                    return res.status(200).json({
+                        success:true
+                    });
+                    
+                }
+            } catch(error){
+                console.log(error);
+                return next(new ErrorResponse("Invalid code", 404));
+            }
         },
         postChannel: async (req, res, next) => {
             const channel = await Channel.create({
