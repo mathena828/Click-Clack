@@ -20,6 +20,18 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    bio: {
+        type: String,
+        required: [true, "Tell us about yourself."],
+    },
+    school: {
+        type: String,
+        required: [true, "You need to provide the name of your school or university."],
+    },
+    country: {
+        type: String,
+        required: [true, "You need to provide the country you are from."],
+    }, 
 });
 
 UserSchema.pre("save", async function(next) {

@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 const controller = {
     register: async(req, res, next) => {
-        const { username, email, password } = req.body;
+        const { username, email, password, bio, school, country } = req.body;
         var isTeacher = false
         console.log(req.body)
         try {
@@ -12,6 +12,9 @@ const controller = {
                 email,
                 password,
                 isTeacher,
+                bio,
+                school,
+                country, 
             })
             var token = sendToken(user, 200);
             return res.status(200).json({ success: true, token, user });
