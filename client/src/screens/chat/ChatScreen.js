@@ -34,7 +34,7 @@ const ChatScreen = ()=> {
         socket.on('newMessage',async data=>{
             let message = await data;
             setMessages(oldMessages => [...oldMessages, message]);
-            setChannels(channelsList); 
+            //setChannels(channelsList); 
         })
     }
     const handleSendMessage = (channel_id, text) => {
