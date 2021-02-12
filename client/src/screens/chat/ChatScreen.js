@@ -16,7 +16,7 @@ const ChatScreen = ()=> {
     const [cookies, setCookie] = useCookies(['user']);
     
     const loadChannels = async() =>{
-        fetch(SERVER+'/api/chat/channels/'+cookies.user._id).then(async response=>{
+        fetch(SERVER+'/api/chat/channels/users/'+cookies.user._id).then(async response=>{
             let data = await response.json();
             console.log(data);
             setChannels(data.channels)
@@ -53,13 +53,13 @@ const ChatScreen = ()=> {
             body: JSON.stringify(body)
         });
     }
-    const handleChannelSelect = (id) =>{
+    const handleChannelSelect = (id,name) =>{
         console.log("Joined channel", id);
         fetch(SERVER+'/api/chat/channels/'+id).then(async response=>{
             let data = await response.json();
             setMessages(data.messages);
             console.log(data.messages);
-            setChannel(id)
+            setChannel({id,name})
             socket.emit('getChannel',{channelId:id})
             //setChannels(data.channels)
         });
@@ -74,7 +74,7 @@ const ChatScreen = ()=> {
     return (
         <div className="chat-app">
             <ChannelList channels={channels} onSelectChannel={handleChannelSelect}/>
-            <MessagesPanel onSendMessage={handleSendMessage} messages={messages} channelId={channel}/>
+            <MessagesPanel onSendMessage={handleSendMessage} messages={messages} channel={channel}/>
         </div>
     )
 }

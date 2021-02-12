@@ -2,9 +2,9 @@ import React from 'react';
 import Channel from './Channel';
 
 const ChannelList = ({channels, onSelectChannel}) =>{
-    const handleClick = id =>{
+    const handleClick = (id,name) =>{
         console.log("clicked")
-        onSelectChannel(id);
+        onSelectChannel(id,name);
     }
     let list = "There are no channels";
     if(channels){
