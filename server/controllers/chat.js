@@ -9,6 +9,12 @@ const chatController = (socket) => {
             return res.status(200).json({ success: true, channels });
 
         },
+        getUserChannels: async (req, res, next) => {
+            const channels = await Channel.find({ participants: { $all: [req.params.userId] } })
+           
+            return res.status(200).json({ success: true, channels });
+
+        },
         getChannel: async (req, res, next) => {
 
             const messages = await Message.find({ channelId: req.params.channelId }).sort({ 'createdAt': 1 });
@@ -20,7 +26,7 @@ const chatController = (socket) => {
         postChannel: async (req, res, next) => {
             const channel = await Channel.create({
                 name: req.body.name,
-                participants: 0,
+                participants: [req.body.userId],
                 sockets: [],
             }).then(async (data) => {
                 const message = await Message.create({
@@ -29,11 +35,12 @@ const chatController = (socket) => {
                     content: "first Message",
                 });
                 console.log(message);
+                console.log(data);
+                return res.status(200).json({ success: true, channel:data });
+            }).catch(()=>{
+                return res.status(404).json({success:false, message: 'Creation failed'})
             });
-            /* const message = await Message.create({
-                
-            }); */
-            return res.status(200).json({ success: true, channel });
+            
         },
         postMessage: async (req, res) => {
             data = req.body;

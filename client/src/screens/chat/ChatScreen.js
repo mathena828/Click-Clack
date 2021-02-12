@@ -16,7 +16,7 @@ const ChatScreen = ()=> {
     const [cookies, setCookie] = useCookies(['user']);
     
     const loadChannels = async() =>{
-        fetch(SERVER+'/api/chat/channels').then(async response=>{
+        fetch(SERVER+'/api/chat/channels/'+cookies.user._id).then(async response=>{
             let data = await response.json();
             console.log(data);
             setChannels(data.channels)
@@ -39,8 +39,6 @@ const ChatScreen = ()=> {
     }
     const handleSendMessage = (channel_id, text) => {
         console.log(channel_id,text);
-        
-        console.log(cookies.user);
         var body = {
             userName: cookies.user.username,
             content: text,

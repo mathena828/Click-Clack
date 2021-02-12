@@ -7,7 +7,6 @@ const Channel = ({id,name,participants,onClick}) =>{
     return(
         <div className="channel-item" onClick={isClicked}>
             <div>{name}</div>
-            <span>{participants}</span>
         </div>
     );
 }
