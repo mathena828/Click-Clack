@@ -54,13 +54,13 @@ const ChatScreen = ()=> {
             body: JSON.stringify(body)
         });
     }
-    const handleChannelSelect = (id, name) => {
+    const handleChannelSelect = (id, name, description) => {
         console.log("Joined channel", id);
         fetch(SERVER+'/api/chat/channels/'+id).then(async response=>{
             let data = await response.json();
             setMessages(data.messages);
             console.log(data.messages);
-            setChannel({id,name})
+            setChannel({id,name, description})
             socket.emit('getChannel',{channelId:id})
             //setChannels(data.channels)
         });     
