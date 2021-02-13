@@ -9,6 +9,7 @@ const server = "http://localhost:5000";
 
 const JoinScreen = () => {
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [formChannel, setFormChannel] = useState('');
   const [channels, setChannels] = useState([]);
   const [error, setError] = useState("");
@@ -46,7 +47,7 @@ const JoinScreen = () => {
     try {
       await axios.post(
         server + "/api/chat/channels",
-        { name, userId: cookies.user._id },
+        { name, description, userId: cookies.user._id },
         config
       ).then((res) => { console.log(res) });
     } catch (error) {
@@ -98,10 +99,15 @@ const JoinScreen = () => {
     isTeacher = <Container>
       <h3>Create a new channel for your students</h3>
       <Form onSubmit={joinHandler}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>New Channel</Form.Label>
+        <Form.Group>
+          <Form.Label>Channel Name</Form.Label>
           <Form.Control type="text" placeholder="Enter name" onChange={(e) => setName(e.target.value)}
             value={name} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Channel Description</Form.Label>
+          <Form.Control as="textarea" placeholder="Enter description" onChange={(e) => setDescription(e.target.value)}
+            value={description} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Create
