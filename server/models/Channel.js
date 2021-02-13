@@ -5,6 +5,10 @@ const ChannelSchema = new mongoose.Schema({
         type: String,
         required: [true, "You need to provide a channel name."],
     },
+    description: {
+        type: String,
+        required: [true, "You need to provide a channel description."],
+    },
     participants: [{ 
         type : String
     }],
