@@ -64,25 +64,23 @@ const RegisterScreen = ({ history }) => {
   return (
     <Container fluid className="p-5">
        <h1>Get Started
-        <span>
-            <img  
-            width={50}
-            height={50}
-            className="ml-2 mb-2"
-            src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/rocket_1f680.png" 
-            alt="hello"/>
-        </span> </h1>
-      <h5 className="mb-4">Create an account to join the <b className="underline-black">dialogue</b> and shape the future one message at a time.</h5>
-      {error && <Alert variant="danger">
+          <span>
+              <img  
+              width={50}
+              height={50}
+              className="ml-2 mb-2"
+              src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/rocket_1f680.png" 
+              alt="hello"/>
+          </span> </h1>
+        <h5 className="mb-4">Create an account to join the <b className="underline-black">dialogue</b> and shape the future one message at a time.</h5>
+      <Form onSubmit={registerHandler}>
+        <Form.Group className="form-inline">
+          <Form.Label><h5>I am a...</h5></Form.Label>
+          <Button className="mx-2" onClick={handleTeacherClick} variant={isTeacher ? "secondary" : "light"}>Teacher</Button>{"   "}<Button onClick={handleStudentClick} variant={isTeacher ? "light" : "secondary"}>Student</Button>
+        </Form.Group>
+        {error && <Alert variant="danger">
           {error}
       </Alert> }
-      <Form onSubmit={registerHandler}>
-        <div style={{textAlign:"center"}}>
-        <Form.Group>
-          <Form.Label><h5>I am a...</h5></Form.Label> <br/>
-          <Button onClick={handleTeacherClick} variant={isTeacher ? "secondary" : "light"}>Teacher</Button>{"   "}<Button onClick={handleStudentClick} variant={isTeacher ? "light" : "secondary"}>Student</Button>
-        </Form.Group>
-        </div>
         <Form.Group>
           <Form.Label>Username</Form.Label>
           <Form.Control type="text" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}
@@ -314,7 +312,7 @@ const RegisterScreen = ({ history }) => {
       </Form>
       <hr></hr>
       <span>
-          Already have an account? <Link to="/login">Sign In</Link>
+          Already have an account? <Link to="/login"><b>Sign In</b></Link>
       </span>
     </Container>
   );

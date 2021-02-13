@@ -83,7 +83,7 @@ const LoginScreen = ({ history }) => {
       </Form>
       <hr></hr>
       <span>
-          Don't have an account? <Link to="/register">Sign Up</Link>
+          Don't have an account? <Link to="/register"><b>Sign Up</b></Link>
       </span>
     </Container>
   );

@@ -27,10 +27,8 @@ const ProfileScreen = ({ history }) => {
           <Emoji name="school" width={20} className="mx-2" />{cookies.user.school} <br />
           <Emoji name="airplane" width={20} className="mx-2" />{cookies.user.country}
           </Card>
-          
         </Col>
       </Row>
-
       <JoinScreen/>
     </Container>
   );

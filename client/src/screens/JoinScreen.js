@@ -13,10 +13,8 @@ const JoinScreen = () => {
   const [formChannel, setFormChannel] = useState('');
   const [channels, setChannels] = useState([]);
   const [error, setError] = useState("");
-
   const [success, setSuccess] = useState("");
-
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies,] = useCookies(['user']);
 
   useEffect(() => {
     const checkPrivate = async () => {
@@ -51,7 +49,7 @@ const JoinScreen = () => {
         config
       ).then((res) => { 
         if (res.data.success) {
-          setSuccess("Created channel, check your chats now to see it.");
+          setSuccess("You successfully created a channel. Check it out under the Chat tab.");
           setTimeout(() => {
             setSuccess("");
           }, 5000);
@@ -102,8 +100,8 @@ const JoinScreen = () => {
   };
   let isTeacher;
   if (cookies.user.isTeacher) {
-    isTeacher = <Container>
-      <h3>Create a new channel for your students</h3>
+    isTeacher = <Container fluid>
+      <h2>Create a <mark>new channel</mark> for your students.</h2>
       <Form onSubmit={joinHandler}>
         <Form.Group>
           <Form.Label>Channel Name</Form.Label>
@@ -125,7 +123,6 @@ const JoinScreen = () => {
   }
   return (
     <Container>
-
       {error && <Alert variant="danger">
         {error}
       </Alert>}
