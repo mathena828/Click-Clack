@@ -10,7 +10,7 @@ const JoinScreen = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [formChannel, setFormChannel] = useState('');
-  const [channels, setChannels] = useState([]);
+  const [, setChannels] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [cookies,] = useCookies(['user']);
@@ -51,14 +51,16 @@ const JoinScreen = () => {
           setSuccess("You successfully created a channel. Check it out under the Chat tab.");
           setTimeout(() => {
             setSuccess("");
-          }, 5000);
+          }, 10000);
         }console.log(res) });
+        setName("");
+        setDescription("");
     } catch (error) {
       if (error.response.data || error.response) {
         setError(error.response.data.error);
         setTimeout(() => {
           setError("");
-        }, 5000);
+        }, 10000);
       } else {
         console.log(error);
       }

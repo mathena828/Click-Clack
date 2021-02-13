@@ -22,9 +22,9 @@ const ProfileScreen = () => {
         </Col>
         <Col md={4} sm={12}>
           <Card body className="shadow mb-3">
-            <Emoji name="envelope-with-arrow" width={20} className="mx-2 mb-1" />{cookies.user.email} <br />
-            <Emoji name="books" width={20} className="mx-2 mb-1" />{cookies.user.school} <br />
-            <Emoji name="airplane" width={20} className="mx-2" />{cookies.user.country}
+            <Emoji name="envelope-with-arrow" width={20} className="mr-2 mb-1" />{cookies.user.email} <br />
+            <Emoji name="books" width={20} className="mr-2 mb-1" />{cookies.user.school} <br />
+            <Emoji name="airplane" width={20} className="mr-2" />{cookies.user.country}
           </Card>
         </Col>
       </Row>

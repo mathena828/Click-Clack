@@ -63,6 +63,11 @@ select {
     color: white;
 }
 
+.alert-success {
+    background-color: #2fc890;
+    color: white;
+}
+
 /* Navigation Bar */
 .nav-link, .btn {
     font-family: 'Montserrat',  sans-serif;

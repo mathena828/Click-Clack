@@ -1,6 +1,5 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
-import { UserContext } from "../../App";
 import { Container, Row, Col } from "react-bootstrap";
 import ChannelList from './ChannelList'
 import MessagesPanel from "./MessagesPanel";
@@ -13,8 +12,9 @@ const ChatScreen = ()=> {
     const [channels, setChannels] = useState([])
     const [channel, setChannel] = useState(null);
     const [messages, setMessages] = useState([]);
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, ] = useCookies(['user']);
     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const loadChannels = async() =>{
         fetch(SERVER+'/api/chat/channels/users/'+cookies.user._id).then(async response=>{
             let data = await response.json();
@@ -69,10 +69,10 @@ const ChatScreen = ()=> {
         loadChannels();
         configureSocket();
         console.log(JSON.stringify(cookies));
-    },[])
+    },[cookies, loadChannels])
     
     return (
-        <Container className="chat-app" style={{width:"100vw"}}>
+        <Container fluid className="chat-app" style={{width:"100vw"}}>
             <Row style={{width:"100%"}}>
                 <Col md={3} sm={12}>
                     <ChannelList channels={channels} onSelectChannel={handleChannelSelect}/>

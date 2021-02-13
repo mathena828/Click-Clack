@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { Button, Container, Row, Col } from "react-bootstrap";
 
 const MessagesPanel = ({onSendMessage, messages, channel}) => {
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, ] = useCookies(['user']);
     const [copy, setCopy] = useState('Get invite code');
     const [input,setInput] = useState('');
     function copyToClipboard(){
@@ -17,7 +17,7 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
     let list = <div>There are no messages shown</div>;
     if (messages) {
         list = messages.map(m => {
-            if(m.userName != cookies.user.username){
+            if(m.userName !== cookies.user.username){
                 return <Message key={m._id} id={m._id} senderName={m.userName} text={m.content} school={m.school} />
             }else{
                 return <Message key={m._id} id={m._id} senderName={""} text={m.content} />
@@ -39,7 +39,7 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
     }
     const send=()=>{
         console.log(input);
-        if(input && input!=''){
+        if(input && input!==''){
             onSendMessage(channel.id, input);
             setInput('');
         }
