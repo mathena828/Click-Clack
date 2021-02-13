@@ -3,8 +3,7 @@ const User = require("../models/User");
 
 const controller = {
     register: async(req, res, next) => {
-        const { username, email, password, bio, school, country } = req.body;
-        var isTeacher = false
+        const { username, email, password, bio, school, country, isTeacher } = req.body;
         console.log(req.body)
         try {
             const user = await User.create({
@@ -15,6 +14,7 @@ const controller = {
                 bio,
                 school,
                 country, 
+                isTeacher
             })
             var token = sendToken(user, 200);
             return res.status(200).json({ success: true, token, user });
