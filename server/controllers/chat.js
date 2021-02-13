@@ -64,6 +64,7 @@ const chatController = (socket) => {
                 userName: data.userName,
                 content: data.content,
                 channelId: data.channelId,
+                school: data.school
             });
             //do a socket thing here!!!!!
             socket.in(data.channelId).emit('newMessage',JSON.parse(JSON.stringify(message)));

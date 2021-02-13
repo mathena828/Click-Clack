@@ -41,6 +41,14 @@ const controller = {
         } catch (error) {
             next(error);
         }
+    },
+    profile: async(req, res, next) => {
+        const user = await User.findOne(req.body.username);
+        if (user) {
+            res.status(200).json({ success: true, user});
+        } else {
+            return res.status(404).json({success:false, message: 'User cannot be found.'})
+        }
     }
 }
 const sendToken = (user, statusCode) => {

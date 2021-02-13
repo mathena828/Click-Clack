@@ -18,7 +18,7 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
     if (messages) {
         list = messages.map(m => {
             if(m.userName != cookies.user.username){
-                return <Message key={m._id} id={m._id} senderName={m.userName} text={m.content} />
+                return <Message key={m._id} id={m._id} senderName={m.userName} text={m.content} school={m.school} />
             }else{
                 return <Message key={m._id} id={m._id} senderName={""} text={m.content} />
             }

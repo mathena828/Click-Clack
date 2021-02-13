@@ -48,7 +48,13 @@ const JoinScreen = () => {
         server + "/api/chat/channels",
         { name, userId: cookies.user._id },
         config
-      ).then((res) => { console.log(res) });
+      ).then((res) => { 
+        if (res.data.success) {
+          setSuccess("Created channel, check your chats now to see it.");
+          setTimeout(() => {
+            setSuccess("");
+          }, 5000);
+        }console.log(res) });
     } catch (error) {
       if (error.response.data || error.response) {
         setError(error.response.data.error);
@@ -76,7 +82,7 @@ const JoinScreen = () => {
       ).then((res) => {
         console.log(res);
         if (res.data.success) {
-          setSuccess("Joined channel, check your chats now to see it");
+          setSuccess("Joined channel, check your chats now to see it.");
           setTimeout(() => {
             setSuccess("");
           }, 5000);

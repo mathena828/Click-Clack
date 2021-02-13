@@ -44,6 +44,7 @@ const ChatScreen = ()=> {
             userName: cookies.user.username,
             content: text,
             channelId: channel_id,
+            school: cookies.user.school
         } 
         //socket.emit('send-message', { channel_id, text, senderName: socket.id, id: Date.now() });
         fetch(SERVER+'/api/chat/channels/'+channel_id,{
