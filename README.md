@@ -11,4 +11,3 @@
     - `yarn run dev` to start server with hot reload
     * To seed database, run the command `yarn run seed` before running the server
 3. In the client folder, run the command `yarn start`.
-

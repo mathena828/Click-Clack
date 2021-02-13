@@ -46,9 +46,9 @@ const JoinScreen = () => {
     try {
       await axios.post(
         server + "/api/chat/channels",
-        { name, userId:cookies.user._id },
+        { name, userId: cookies.user._id },
         config
-      ).then((res)=>{console.log(res)});
+      ).then((res) => { console.log(res) });
     } catch (error) {
       if (error.response.data || error.response) {
         setError(error.response.data.error);
@@ -73,14 +73,14 @@ const JoinScreen = () => {
         server + "/api/chat/channels/join",
         { channelId: formChannel, userId: cookies.user._id },
         config
-      ).then((res) => { 
+      ).then((res) => {
         console.log(res);
-        if(res.data.success){
+        if (res.data.success) {
           setSuccess("Joined channel, check your chats now to see it");
           setTimeout(() => {
             setSuccess("");
           }, 5000);
-        } 
+        }
       });
     } catch (error) {
       if (error.response.data || error.response) {
@@ -112,38 +112,32 @@ const JoinScreen = () => {
     isTeacher = <div></div>
   }
   return (
-      <Container>
+    <Container>
 
-        {error && <Alert variant="danger">
-          {error}
-      </Alert> }
+      {error && <Alert variant="danger">
+        {error}
+      </Alert>}
       {success && <Alert variant="success">
-          {success}
-      </Alert> }
-        <Row>
-          <Col sm={12} md={6} style={{ backgroundColor: "#29b7ca" }} className="py-4">
-            <Container >
-              <h3 className="text-light">Join a Channel!</h3>
-              <Form onSubmit={newParticipantHandler}>
-                <Form.Group>
-                  <Form.Label><span className="text-light">Channel Code</span></Form.Label>
-                  <Form.Control type="text" placeholder="Enter channel code" onChange={(e) => setFormChannel(e.target.value)}
-                    value={formChannel} />
-                </Form.Group>
-                <Button type="submit" variant="light">Join Channel</Button>
-              </Form>
-            </Container></Col>
-          <Col sm={12} md={6} className="py-4">{isTeacher}</Col>
-        </Row>
-      </Container>
-        ))}
+        {success}
+      </Alert>}
+      <Row>
+        <Col sm={12} md={6} style={{ backgroundColor: "#29b7ca" }} className="py-4">
+          <Container >
+            <h3 className="text-light">Join a Channel!</h3>
+            <Form onSubmit={newParticipantHandler}>
+              <Form.Group>
+                <Form.Label><span className="text-light">Channel Code</span></Form.Label>
+                <Form.Control type="text" placeholder="Enter channel code" onChange={(e) => setFormChannel(e.target.value)}
+                  value={formChannel} />
+              </Form.Group>
+              <Button type="submit" variant="light">Join Channel</Button>
+            </Form>
+          </Container></Col>
+        <Col sm={12} md={6} className="py-4">{isTeacher}</Col>
+      </Row>
+    </Container>
+  )
+}
 
-        {isTeacher}
-        <Container style={{marginTop: '1em'}}>
-          <h5>Join a Channel!</h5>
-        </Container>
-    </div>
-  );
-};
 
 export default JoinScreen;
