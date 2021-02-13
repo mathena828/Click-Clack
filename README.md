@@ -9,6 +9,6 @@
     - For Linux, run `sudo service mongodb start`
 2. In the server folder, run the command `yarn run server`.
     - `yarn run dev` to start server with hot reload
-    1. To seed database, run the command `yarn run seed`
+    * To seed database, run the command `yarn run seed` before running the server
 3. In the client folder, run the command `yarn start`.
 
