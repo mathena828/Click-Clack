@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, Button, Alert, Container, Row, Col, Card } from 'react-bootstrap'
 import axios from "axios";
 import { useCookies } from 'react-cookie';
+import Emoji from 'react-apple-emojis'
 
 const server = "http://localhost:5000";
 
@@ -118,7 +119,19 @@ const JoinScreen = () => {
         </Form>
       </Card>
   } else {
-    isTeacher = <div></div>
+    isTeacher = 
+      <Card border="dark" className="shadow">
+        <Card.Header className="pb-0 create-header">
+          <h3><b>Community Guidelines</b></h3>
+        </Card.Header>
+        <Card.Body>
+          <div>1. Be kind and respectful towards everyone you interact with.<Emoji name="sparkling-heart" width={18} className="mx-1 mb-1" /></div>
+          <div>2. Do not partake in or encourage the harassment of others.<Emoji name="face-with-symbols-on-mouth" width={18} className="mx-1 mb-1" />Do not make threats of violence<Emoji name="anger-symbol" width={18} className="mx-1 mb-1" />or promote hate speech.</div>
+          <div>3. Participate<Emoji name="man-raising-hand" width={18} className="mx-1 mb-1" />in the discussions actively but stay on topic.<Emoji name="thought-balloon" width={18} className="mx-1 mb-1" /></div>
+          <div>4. Avoid sharing private and personal information.<Emoji name="bust-in-silhouette" width={18} className="mx-1 mb-1" /></div>
+          <div>5. Ask questions<Emoji name="question-mark" width={18} className="mx-1 mb-1" />to show that you are paying attention.</div>
+        </Card.Body>
+      </Card>
   }
   return (
     <Container fluid>

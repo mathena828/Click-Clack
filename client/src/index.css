@@ -89,6 +89,7 @@ select {
     font-weight: 600; 
 }
 
+/* Profile */
 
 .new-channel-input {
     border-left: 0.5rem solid #fcb940 !important;
@@ -97,8 +98,15 @@ select {
 .join-card-header {
     background-color: #29b7ca;
     color: white;
+    font-family: 'Montserrat',  sans-serif;
+}
+
+.create-header {
+    background-color: #343b3f;
+    color: white;
+    font-family: 'Montserrat',  sans-serif;
 }
 
 .join-card-body {
-    background-color: #f4f4f8;;
+    background-color: #f4f4f8;
 }
