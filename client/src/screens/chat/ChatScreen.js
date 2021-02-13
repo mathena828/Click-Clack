@@ -2,6 +2,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useCookies } from 'react-cookie';
 import { UserContext } from "../../App";
+import { Container, Row, Col } from "react-bootstrap";
 import ChannelList from './ChannelList'
 import MessagesPanel from "./MessagesPanel";
 import './chat.scss';
@@ -71,10 +72,16 @@ const ChatScreen = ()=> {
     },[])
     
     return (
-        <div className="chat-app">
-            <ChannelList channels={channels} onSelectChannel={handleChannelSelect}/>
-            <MessagesPanel onSendMessage={handleSendMessage} messages={messages} channel={channel}/>
-        </div>
+        <Container className="chat-app" style={{width:"100vw"}}>
+            <Row style={{width:"100%"}}>
+                <Col md={3} sm={12}>
+                    <ChannelList channels={channels} onSelectChannel={handleChannelSelect}/>
+                </Col>
+                <Col md={9} sm={12}>
+                    <MessagesPanel onSendMessage={handleSendMessage} messages={messages} channel={channel}/>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
