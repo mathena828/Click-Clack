@@ -31,9 +31,6 @@ const NavigationBar = () => {
                 <LinkContainer to="/chat">
                     <Nav.Link>Chat</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/join">
-                    <Nav.Link>Join</Nav.Link>
-                </LinkContainer>
                 <LinkContainer to="#logout">
                   <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
                 </LinkContainer>

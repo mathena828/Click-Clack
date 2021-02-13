@@ -21,7 +21,6 @@ const App = () => {
             <Route path="/login" component={LoginScreen} />
             <PrivateRoute path="/chat" component={ChatScreen} />
             <PrivateRoute path="/profile" component={ProfileScreen} />
-            <PrivateRoute path="/join" component={JoinScreen} />
           </Switch>
       </Router>
     </CookiesProvider>
