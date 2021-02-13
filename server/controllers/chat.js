@@ -26,7 +26,7 @@ const chatController = (socket) => {
             try{
                 var channel = await Channel.findOne({_id: req.body.channelId});
                 if(!channel){
-                    return next(new ErrorResponse("Channel not found", 401));
+                    return next(new ErrorResponse("Channel Not Found", 401));
                 }else{
                     channel.participants.push(req.body.userId);
                     channel.save();
@@ -37,19 +37,20 @@ const chatController = (socket) => {
                 }
             } catch(error){
                 console.log(error);
-                return next(new ErrorResponse("Invalid code", 404));
+                return next(new ErrorResponse("Invalid Code", 404));
             }
         },
         postChannel: async (req, res, next) => {
             const channel = await Channel.create({
                 name: req.body.name,
+                description: req.body.description,
                 participants: [req.body.userId],
                 sockets: [],
             }).then(async (data) => {
                 const message = await Message.create({
                     channelId: data._id,
-                    userName: "testChat",
-                    content: "first Message",
+                    userName: "admin",
+                    content: "Hello, world!",
                 });
                 console.log(message);
                 console.log(data);
@@ -66,7 +67,6 @@ const chatController = (socket) => {
                 channelId: data.channelId,
                 school: data.school
             });
-            //do a socket thing here!!!!!
             socket.in(data.channelId).emit('newMessage',JSON.parse(JSON.stringify(message)));
             return res.status(200).json({ success: true, message });
         }

@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
-import {Container, Card, ListGroup} from 'react-bootstrap'
+import {Container} from 'react-bootstrap'
+import { useCookies } from 'react-cookie';
+const SERVER = "http://localhost:5000";
 const ProfileScreen = ({ history }) => {
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('user'));
-    setUser(data);
-    console.log(data)
-  }, []);
+  const [cookies, ] = useCookies(['user']);
     return (
       <Container fluid className="p-5">
-        <h1 className="mb-3">Hello, <mark>{user.username}</mark> 
+        <h1 className="mb-3">Hello, <mark>{cookies.user.username}</mark> 
           <span>
               <img  
               width={50}
@@ -19,14 +15,10 @@ const ProfileScreen = ({ history }) => {
               alt="hello"/>
           </span> 
         </h1>
-        <h5 className="mb-3">{user.bio}</h5>
-        <Card>
-          <ListGroup variant="flush">
-            <ListGroup.Item>{user.email}</ListGroup.Item>
-            <ListGroup.Item>{user.country}</ListGroup.Item>
-            <ListGroup.Item>{user.school}</ListGroup.Item>
-          </ListGroup>
-        </Card>
+        <h5 className="mb-3">{cookies.user.bio}</h5>
+        {cookies.user.email}
+        {cookies.user.school}
+        {cookies.user.country}
       </Container>
     );
   };

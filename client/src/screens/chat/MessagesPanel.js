@@ -49,6 +49,7 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
              <Container style={{marginTop:'1em'}} className="py-2">
                 <Row>
                     <Col><h3>{channel.name}</h3></Col>
+                    <Col><h5>{channel.description}</h5></Col>
                     <Col>{getInvite}</Col>
                 </Row>
             </Container>
