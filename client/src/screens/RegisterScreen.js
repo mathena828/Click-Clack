@@ -14,7 +14,7 @@ const RegisterScreen = ({ history }) => {
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
   const [school, setSchool] = useState("");
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("Afghanistan");
   const [error, setError] = useState("");
   const [, setCookie] = useCookies(['user']);
 

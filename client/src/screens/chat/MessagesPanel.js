@@ -48,7 +48,7 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
         <Container className="messages-panel" style={{width:"100%"}}>
             {channel.id !== 0 ? (
                 <div>
-                    <Card bg="dark" text="light" className="p-3 mb-3">
+                    <Card bg="dark" text="light" className="p-3 mb-3 shadow">
                         <Row>
                             <Col lg={8}><h2 className="channel-title my-2">{channel.name}</h2></Col>
                             <Col lg={4}>{getInvite}</Col>
@@ -58,7 +58,7 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
                         </Row>
                     </Card>
                     <Container fluid className="p-0"> 
-                        <Card className="messages-list p-3" >{list}</Card>
+                        <Card className="messages-list p-3 shadow" >{list}</Card>
                         <Row style={{width:"100%"}}>
                             <Col md={10} className="pr-0">
                                 <input placeholder="Enter message" className="form-control mt-3" type="text" onChange={handleInput} value={input}/>
