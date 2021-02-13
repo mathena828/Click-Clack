@@ -14,7 +14,6 @@ const ChatScreen = ()=> {
     const [messages, setMessages] = useState([]);
     const [cookies, ] = useCookies(['user']);
     
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const loadChannels = async() =>{
         fetch(SERVER+'/api/chat/channels/users/'+cookies.user._id).then(async response=>{
             let data = await response.json();
@@ -69,7 +68,7 @@ const ChatScreen = ()=> {
         loadChannels();
         configureSocket();
         console.log(JSON.stringify(cookies));
-    },[cookies, loadChannels])
+    },[])
     
     return (
         <Container fluid className="chat-app" style={{width:"100vw"}}>
