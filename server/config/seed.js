@@ -33,7 +33,7 @@ var data = [
                 'password': "juandelacruz",
                 'isTeacher': false,
                 'bio': 'I\'m a Grade 7 student at UPIS. My favorite subject is Math and Philosophy.',
-                'school': 'University of the Philippines Integrated School',
+                'school': 'UP Integrated School',
                 'country': 'Philippines',
             },
             {
@@ -63,7 +63,7 @@ var data = [
                 'password': "teacher_china",
                 'isTeacher': true,
                 'bio': 'I teach Pre-Algebra to Grade 7 students at UPIS.',
-                'school': 'University of the Philippines Integrated School',
+                'school': 'UP Integrated School',
                 'country': 'Philippines',
             },
         ],
@@ -84,21 +84,21 @@ var data = [
         'documents': [
             {
                 'userName': 'teacher_china',
-                'school': 'University of the Philippines Integrated School',
+                'school': 'UP Integrated School',
                 'content': 'We created this channel so you guys can share your thoughts on the current state of e-Learning and how it can be used to lift up the educational sector in your respective countries.',
                 'channelId': "6027897f48f64b061b4bfc4f",
                 "createdAt" : "2021-02-13T10:22:25.863Z",
             },
             {
                 'userName': 'juandelacruz',
-                'school': 'University of the Philippines Integrated School',
+                'school': 'UP Integrated School',
                 'content': 'Personally, I find that ClickClack has been a great help in that regard.',
                 'channelId': "6027897f48f64b061b4bfc4f",
                 "createdAt" : "2021-02-13T10:22:25.864Z",
             },
             {
                 'userName': 'juandelacruz',
-                'school': 'University of the Philippines Integrated School',
+                'school': 'UP Integrated School',
                 'content': 'Being able to talk to other students from all walks of life has really helped concretize my learnings in the classroom.',
                 'channelId': "6027897f48f64b061b4bfc4f",
                 "createdAt" : "2021-02-13T10:22:25.865Z",
@@ -119,7 +119,7 @@ var data = [
             },
             {
                 'userName': 'juandelacruz',
-                'school': 'International School of Madrid',
+                'school': 'UP Integrated School',
                 'content': 'It\'s interesting to hear about the context in each country and see how that shapes people\'s perspectives.',
                 'channelId': "6027897f48f64b061b4bfc4f",
                 "createdAt" : "2021-02-13T10:22:25.868Z",
