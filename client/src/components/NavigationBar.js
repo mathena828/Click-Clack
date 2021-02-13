@@ -1,17 +1,14 @@
-import React, {useContext} from "react";
-import { UserContext } from "../App";
-
+import React from "react";
 import {Navbar, Nav, Button} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 
 
 const NavigationBar = () => {
 
-  const [, setUser] = useContext(UserContext);
-
   const logoutHandler = () => {
-      setUser(null);
+      localStorage.removeItem("user");
       localStorage.removeItem("authToken");
+      window.location.reload();
   };
     
   return (
@@ -26,7 +23,7 @@ const NavigationBar = () => {
               </LinkContainer>
           </Nav>
           {
-            localStorage.getItem("authToken") != null ? (
+            localStorage.getItem("authToken") != null ?  (
               <Nav className="ml-auto">
                 <LinkContainer to="/profile">
                   <Nav.Link>Profile</Nav.Link>

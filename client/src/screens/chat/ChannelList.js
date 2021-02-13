@@ -4,7 +4,7 @@ import Channel from './Channel';
 const ChannelList = ({channels, onSelectChannel}) =>{
     const handleClick = (id,name) =>{
         console.log("clicked")
-        onSelectChannel(id,name);
+        onSelectChannel(id, name);
     }
     let list = "There are no channels";
     if(channels){

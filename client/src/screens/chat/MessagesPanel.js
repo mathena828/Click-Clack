@@ -2,7 +2,6 @@ import { useState } from "react";
 import Message from './Message';
 import { useCookies } from 'react-cookie';
 import { Button, Container, Row, Col } from "react-bootstrap";
-
 const MessagesPanel = ({onSendMessage, messages, channel}) => {
     const [cookies, setCookie] = useCookies(['user']);
     const [copy, setCopy] = useState('Get invite code');
@@ -26,7 +25,6 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
             getInvite = <Button onClick={copyToClipboard}>{copy}</Button>
         }
     }
-    
     //console.log(props);
     const handleInput=(e)=>{
         setInput(e.target.value);
@@ -40,7 +38,7 @@ const MessagesPanel = ({onSendMessage, messages, channel}) => {
     }
     return(
         <div className="messages-panel">
-            <Container style={{marginTop:'1em'}}>
+             <Container style={{marginTop:'1em'}}>
                 <Row>
                     <Col><h3>{channel.name}</h3></Col>
                     <Col>{getInvite}</Col>

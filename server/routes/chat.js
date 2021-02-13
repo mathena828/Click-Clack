@@ -9,6 +9,7 @@ const chatIndex = function (chatController) {
     chatRouter.route("/channels/users/:userId").get(chatController.getUserChannels, protect);
     chatRouter.route("/channels").post(chatController.postChannel, protect);
     chatRouter.route("/channels/join").put(chatController.joinChannel, protect);
+    chatRouter.route("/channels/users/:userId").get(chatController.getUserChannels, protect);
     chatRouter.route("/channels/:channelId").get(chatController.getChannel, protect);
     chatRouter.route("/channels/:channelId").post(chatController.postMessage, protect);
     return chatRouter;

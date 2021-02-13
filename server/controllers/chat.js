@@ -57,7 +57,6 @@ const chatController = (socket) => {
             }).catch(()=>{
                 return res.status(404).json({success:false, message: 'Creation failed'})
             });
-            
         },
         postMessage: async (req, res) => {
             data = req.body;

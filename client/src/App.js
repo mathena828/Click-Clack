@@ -1,4 +1,3 @@
-import { useState, createContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { CookiesProvider } from 'react-cookie';
 
@@ -11,14 +10,10 @@ import ProfileScreen from "./screens/ProfileScreen"
 import NavigationBar from "./components/NavigationBar"
 import JoinScreen from "./screens/JoinScreen";
 
-export const UserContext = createContext();
-
 const App = () => {
-  const userState = useState(null);
   return (
     <CookiesProvider>
       <Router>
-        <UserContext.Provider value={userState}>
           <NavigationBar></NavigationBar>
           <Switch>
             <Route exact path="/" component={HomeScreen} />
@@ -28,7 +23,6 @@ const App = () => {
             <PrivateRoute path="/profile" component={ProfileScreen} />
             <PrivateRoute path="/join" component={JoinScreen} />
           </Switch>
-        </UserContext.Provider>
       </Router>
     </CookiesProvider>
   );

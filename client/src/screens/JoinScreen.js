@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 import { Form, Button, Alert, Container, Row, Col } from 'react-bootstrap'
+
 import { useCookies } from 'react-cookie';
 
 const server = "http://localhost:5000";
@@ -10,7 +12,9 @@ const JoinScreen = () => {
   const [formChannel, setFormChannel] = useState('');
   const [channels, setChannels] = useState([]);
   const [error, setError] = useState("");
+
   const [success, setSuccess] = useState("");
+
   const [cookies, setCookie] = useCookies(['user']);
 
   useEffect(() => {
@@ -42,10 +46,9 @@ const JoinScreen = () => {
     try {
       await axios.post(
         server + "/api/chat/channels",
-        { name, userId: cookies.user._id },
+        { name, userId:cookies.user._id },
         config
-      ).then((res) => { console.log(res) });
-
+      ).then((res)=>{console.log(res)});
     } catch (error) {
       if (error.response.data || error.response) {
         setError(error.response.data.error);
@@ -79,7 +82,6 @@ const JoinScreen = () => {
           }, 5000);
         } 
       });
-
     } catch (error) {
       if (error.response.data || error.response) {
         setError(error.response.data.error);
@@ -91,7 +93,6 @@ const JoinScreen = () => {
       }
     }
   };
-
   let isTeacher;
   if (cookies.user.isTeacher) {
     isTeacher = <Container>
@@ -112,12 +113,7 @@ const JoinScreen = () => {
   }
   return (
       <Container>
-        {/* {channels.map((channel) => (
-          <tr key={channel._id}>
-            <td>{channel.name}</td>
-            <td>{channel.participants}</td>
-          </tr>
-        ))} */}
+
         {error && <Alert variant="danger">
           {error}
       </Alert> }
@@ -140,6 +136,13 @@ const JoinScreen = () => {
           <Col sm={12} md={6} className="py-4">{isTeacher}</Col>
         </Row>
       </Container>
+        ))}
+
+        {isTeacher}
+        <Container style={{marginTop: '1em'}}>
+          <h5>Join a Channel!</h5>
+        </Container>
+    </div>
   );
 };
 

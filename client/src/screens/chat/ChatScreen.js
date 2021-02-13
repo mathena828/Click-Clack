@@ -53,7 +53,7 @@ const ChatScreen = ()=> {
             body: JSON.stringify(body)
         });
     }
-    const handleChannelSelect = (id,name) =>{
+    const handleChannelSelect = (id, name) => {
         console.log("Joined channel", id);
         fetch(SERVER+'/api/chat/channels/'+id).then(async response=>{
             let data = await response.json();
@@ -62,8 +62,7 @@ const ChatScreen = ()=> {
             setChannel({id,name})
             socket.emit('getChannel',{channelId:id})
             //setChannels(data.channels)
-        });
-        
+        });     
     }
     useEffect(()=>{
         loadChannels();
