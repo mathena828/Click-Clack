@@ -14,7 +14,6 @@ const Socket = (server)=>{
             online[userId] = socket.id;
             console.log('set online user ' + userId + ' with socket id ' + socket.id )
         })
-        socket.emit('test', "hellooo");
         var previousId;
         const safeJoin = (currentId)=>{
             socket.leave(previousId);

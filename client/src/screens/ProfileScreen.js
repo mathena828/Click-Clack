@@ -27,7 +27,6 @@ const ProfileScreen = ({ history }) => {
             <ListGroup.Item>{user.school}</ListGroup.Item>
           </ListGroup>
         </Card>
-       
       </Container>
     );
   };
