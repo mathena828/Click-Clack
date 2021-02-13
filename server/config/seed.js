@@ -7,11 +7,12 @@ const seedDB = () => {
         // Load Mongoose models
         seeder.loadModels([
             'models/User.js',
-            'models/Channel.js'
+            'models/Channel.js',
+            'models/Message.js'
         ]);
 
         // Clear specified collections
-        seeder.clearModels(['User', 'Channel'], function () {
+        seeder.clearModels(['User', 'Channel', 'Message'], function () {
             console.log(data);
             // Callback to populate DB once collections have been cleared
             seeder.populateModels(data, function () {
@@ -27,43 +28,105 @@ var data = [
         'model': 'User',
         'documents': [
             {
-                'username': 'raepineda',
-                'email': 'raepineda@cvmig.edu.ph',
-                'password': "raepineda",
+                "_id" : "60278937fe1e4d0624490c86",
+                'username': 'juandelacruz',
+                'email': 'juandelacruz@upis.edu.ph',
+                'password': "juandelacruz",
                 'isTeacher': false,
-                'bio': 'I am a student from the University of the Philippines. I like to read and travel. I love talking about zoology and philosophy.',
-                'school': 'University of the Philippines',
+                'bio': 'I\'m a Grade 7 student at UPIS. My favorite subject is Math and Philosophy.',
+                'school': 'University of the Philippines Integrated School',
                 'country': 'Philippines',
             },
             {
-                'username': 'franciscab',
-                'email': 'franciscab@acl.edu.ph',
-                'password': "franciscab",
+                "_id" : "60278937fe1e4d0624490c85",
+                'username': 'janedoe',
+                'email': 'janedoe@ism.edu.es',
+                'password': "janedoe",
                 'isTeacher': false,
-                'bio': 'I am a student from the University of the Philippines. I enjoy public speaking and I am very passionate about climate change.',
-                'school': 'University of the Philippines',
-                'country': 'Philippines',
+                'bio': 'I\'m a Grade 8 student at IS Madrid. I am a strong advocate for gender equality and climate change.',
+                'school': 'International School of Madrid',
+                'country': 'Spain',
             },
             {
-                'username': 'teacher_chi',
-                'email': 'teacherchi@acl.edu.ph',
-                'password': "teacher_chi",
-                'isTeacher': true,
-                'bio': 'I am an Algorithm and Complexities Laboratory professor from the University of the Philippines.',
-                'school': 'University of the Philippines',
-                'country': 'Philippines',
-            },
-            {
+                "_id" : "60278937fe1e4d0624490c87",
                 'username': 'teacher_mathena',
-                'email': 'teachermathena@cvmig.edu.ph',
+                'email': 'teachermathena@ism.edu.es',
                 'password': "teacher_mathena",
                 'isTeacher': true,
-                'bio': 'I am a Computer Vision and Machine Intelligence professor from the University of the Philippines.',
-                'school': 'University of the Philippines',
-                'country': 'Philippines',
+                'bio': 'I teach Social Studies to middle school students in IS Madrid.',
+                'school': 'International School of Madrid',
+                'country': 'Spain',
              },
-        ]
-    }
+             {
+                "_id" : "60278937fe1e4d0624490c88",
+                'username': 'teacher_china',
+                'email': 'teacherchina@upis.edu.ph',
+                'password': "teacher_china",
+                'isTeacher': true,
+                'bio': 'I teach Pre-Algebra to Grade 7 students at UPIS.',
+                'school': 'University of the Philippines Integrated School',
+                'country': 'Philippines',
+            },
+        ],
+    },
+    {
+        'model': 'Channel',
+        'documents': [
+            {
+                "_id" : "6027897f48f64b061b4bfc4f",
+                'name': 'e-Education',
+                'description': 'As the world shifts to online learning, teachers are struggling to motivate disengaged students remotely. How can we improve the remote education experience?',
+                'participants': ["60278937fe1e4d0624490c86","60278937fe1e4d0624490c85","60278937fe1e4d0624490c87","60278937fe1e4d0624490c88"],
+            },
+        ],
+    },
+    {
+        'model': 'Message',
+        'documents': [
+            {
+                'userName': 'teacher_china',
+                'content': 'We created this channel so you guys can share your thoughts on the current state of e-Learning and how it can be used to lift up the educational sector in your respective countries.',
+                'channelId': "6027897f48f64b061b4bfc4f",
+                "createdAt" : "2021-02-13T10:22:25.863Z",
+            },
+            {
+                'userName': 'juandelacruz',
+                'content': 'Personally, I find that ClickClack has been a great help in that regard.',
+                'channelId': "6027897f48f64b061b4bfc4f",
+                "createdAt" : "2021-02-13T10:22:25.864Z",
+            },
+            {
+                'userName': 'juandelacruz',
+                'content': 'Being able to talk to other students from all walks of life has really helped concretize my learnings in the classroom.',
+                'channelId': "6027897f48f64b061b4bfc4f",
+                "createdAt" : "2021-02-13T10:22:25.865Z",
+            },
+            {
+                'userName': 'janedoe',
+                'content': 'Juan, I totally agree.',
+                'channelId': "6027897f48f64b061b4bfc4f",
+                "createdAt" : "2021-02-13T10:22:25.866Z",
+            },
+            {
+                'userName': 'janedoe',
+                'content': 'The new remote set-up can be really isolating but with ClickClack I feel more connected than ever.',
+                'channelId': "6027897f48f64b061b4bfc4f",
+                "createdAt" : "2021-02-13T10:22:25.867Z",
+            },
+            {
+                'userName': 'juandelacruz',
+                'content': 'It\'s interesting to hear about the context in each country and see how that shapes people\'s perspectives.',
+                'channelId': "6027897f48f64b061b4bfc4f",
+                "createdAt" : "2021-02-13T10:22:25.868Z",
+            },
+            {
+                'userName': 'teacher_mathena',
+                'content': 'Great insights, guys! We\'re happy to be able to engage our students in this way.',
+                'channelId': "6027897f48f64b061b4bfc4f",
+                "createdAt" : "2021-02-13T10:22:25.869Z",
+            },
+        ],
+    },
 ];
 seedDB()
 module.exports = seedDB;
