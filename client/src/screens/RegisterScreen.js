@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {Form, Button, Alert, Container} from 'react-bootstrap'
+import Emoji from 'react-apple-emojis'
 
 const server = "http://localhost:5000";
 
@@ -76,7 +77,7 @@ const RegisterScreen = ({ history }) => {
       <Form onSubmit={registerHandler}>
         <Form.Group className="form-inline">
           <Form.Label><h5>I am a...</h5></Form.Label>
-          <Button className="mx-2" onClick={handleTeacherClick} variant={isTeacher ? "secondary" : "light"}>Teacher</Button>{"   "}<Button onClick={handleStudentClick} variant={isTeacher ? "light" : "secondary"}>Student</Button>
+          <Button className="ml-2 mr-1 mb-1" onClick={handleTeacherClick} variant={isTeacher ? "secondary" : "light"}><Emoji className="mb-1" name="teacher" width={20} /> Teacher</Button>{"   "}<Button className="mx-1 mb-1"  onClick={handleStudentClick} variant={isTeacher ? "light" : "secondary"}><Emoji className="mb-1" name="student" width={20} /> Student</Button>
         </Form.Group>
         {error && <Alert variant="danger">
           {error}
