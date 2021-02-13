@@ -2,9 +2,8 @@ import React from "react";
 import {Navbar, Nav, Button} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 
-
 const NavigationBar = () => {
-
+  
   const logoutHandler = () => {
       localStorage.removeItem("user");
       localStorage.removeItem("authToken");

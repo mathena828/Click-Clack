@@ -54,6 +54,11 @@ select {
     -moz-appearance: none;
 }
 
+.alert-danger {
+    background-color: #fe4b48;
+    color: white;
+}
+
 /* Navigation Bar */
 .nav-link, .btn {
     font-family: 'Montserrat',  sans-serif;
