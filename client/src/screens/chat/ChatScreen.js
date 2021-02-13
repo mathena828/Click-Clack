@@ -4,7 +4,7 @@ import { UserContext } from "../../App";
 import { Container, Row, Col } from "react-bootstrap";
 import ChannelList from './ChannelList'
 import MessagesPanel from "./MessagesPanel";
-import './chat.scss';
+import '../../stylesheets/chat.scss';
 import socketClient  from "socket.io-client";
 const SERVER = "http://localhost:5000";
 const socket = socketClient(SERVER);

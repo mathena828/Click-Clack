@@ -76,7 +76,7 @@ const RegisterScreen = ({ history }) => {
         <h5 className="mb-4">Create an account to join the <b className="underline-black">dialogue</b> and shape the future one message at a time.</h5>
       <Form onSubmit={registerHandler}>
         <Form.Group className="form-inline">
-          <Form.Label><h5>I am a...</h5></Form.Label>
+          <Form.Label><h5>I am a ...</h5></Form.Label>
           <Button className="ml-2 mr-1 mb-1" onClick={handleTeacherClick} variant={isTeacher ? "secondary" : "light"}><Emoji className="mb-1" name="teacher" width={20} /> Teacher</Button>{"   "}<Button className="mx-1 mb-1"  onClick={handleStudentClick} variant={isTeacher ? "light" : "secondary"}><Emoji className="mb-1" name="student" width={20} /> Student</Button>
         </Form.Group>
         {error && <Alert variant="danger">

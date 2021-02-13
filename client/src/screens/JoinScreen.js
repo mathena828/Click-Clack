@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
+import { Form, Button, Alert, Container, Row, Col, Card } from 'react-bootstrap'
 import axios from "axios";
-
-import { Form, Button, Alert, Container, Row, Col } from 'react-bootstrap'
-
 import { useCookies } from 'react-cookie';
 
 const server = "http://localhost:5000";
@@ -81,7 +79,7 @@ const JoinScreen = () => {
       ).then((res) => {
         console.log(res);
         if (res.data.success) {
-          setSuccess("Joined channel, check your chats now to see it.");
+          setSuccess("You successfully joined a channel. Check it out under the Chat tab.");
           setTimeout(() => {
             setSuccess("");
           }, 5000);
@@ -100,29 +98,30 @@ const JoinScreen = () => {
   };
   let isTeacher;
   if (cookies.user.isTeacher) {
-    isTeacher = <Container fluid>
-      <h2>Create a <mark>new channel</mark> for your students.</h2>
-      <Form onSubmit={joinHandler}>
-        <Form.Group>
-          <Form.Label>Channel Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter name" onChange={(e) => setName(e.target.value)}
-            value={name} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Channel Description</Form.Label>
-          <Form.Control as="textarea" placeholder="Enter description" onChange={(e) => setDescription(e.target.value)}
-            value={description} />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Create
-    </Button>
-      </Form>
-    </Container>
+    isTeacher = 
+      <Card body bg="dark" text="light" className="shadow">
+        <h3>Create a <b className="underline-white-2">new channel</b> for your students.</h3>
+        <Form onSubmit={joinHandler}>
+          <Form.Group>
+            <Form.Label>Name</Form.Label>
+            <Form.Control className="new-channel-input" type="text" placeholder="Enter name" onChange={(e) => setName(e.target.value)}
+              value={name} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
+            <Form.Control className="new-channel-input" as="textarea" placeholder="Enter description" onChange={(e) => setDescription(e.target.value)}
+              value={description} />
+          </Form.Group>
+          <Button variant="secondary" type="submit">
+            Create Channel
+          </Button>
+        </Form>
+      </Card>
   } else {
     isTeacher = <div></div>
   }
   return (
-    <Container>
+    <Container fluid>
       {error && <Alert variant="danger">
         {error}
       </Alert>}
@@ -130,18 +129,30 @@ const JoinScreen = () => {
         {success}
       </Alert>}
       <Row>
-        <Col sm={12} md={6} style={{ backgroundColor: "#29b7ca" }} className="py-4">
-          <Container >
-            <h3 className="text-light">Join a Channel!</h3>
-            <Form onSubmit={newParticipantHandler}>
-              <Form.Group>
-                <Form.Label><span className="text-light">Channel Code</span></Form.Label>
-                <Form.Control type="text" placeholder="Enter channel code" onChange={(e) => setFormChannel(e.target.value)}
-                  value={formChannel} />
-              </Form.Group>
-              <Button type="submit" variant="light">Join Channel</Button>
-            </Form>
-          </Container></Col>
+        <Col sm={12} md={6} className="py-4">
+            <Card border="primary" className="shadow">
+              <Card.Header className="pb-0 join-card-header">
+              <h3><b>Join Channel</b><span>
+                <img
+                  width={40}
+                  height={40}
+                  className="ml-2 mb-2"
+                  src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/speech-balloon_1f4ac.png"
+                  alt="hello" />
+              </span></h3>
+              </Card.Header>
+              <Card.Body className="join-card-body">
+                <Form onSubmit={newParticipantHandler}>
+                  <Form.Group>
+                    <Form.Label>Invite Code</Form.Label>
+                    <Form.Control type="text" placeholder="Enter invite code" onChange={(e) => setFormChannel(e.target.value)}
+                      value={formChannel} />
+                  </Form.Group>
+                  <Button type="submit" variant="primary">Join Channel</Button>
+                </Form>
+              </Card.Body>
+            </Card>
+        </Col>
         <Col sm={12} md={6} className="py-4">{isTeacher}</Col>
       </Row>
     </Container>

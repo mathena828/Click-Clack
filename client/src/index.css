@@ -16,6 +16,10 @@ mark {
     border-bottom: 4px solid #fff;
 }
 
+.underline-white-2 {
+    border-bottom: 2px solid #fff;
+}
+
 .underline-black {
     border-bottom: 2px solid #000;
 }
@@ -85,3 +89,16 @@ select {
     font-weight: 600; 
 }
 
+
+.new-channel-input {
+    border-left: 0.5rem solid #fcb940 !important;
+}
+
+.join-card-header {
+    background-color: #29b7ca;
+    color: white;
+}
+
+.join-card-body {
+    background-color: #f4f4f8;;
+}
