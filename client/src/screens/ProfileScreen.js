@@ -1,5 +1,6 @@
 import {Container} from 'react-bootstrap'
 import { useCookies } from 'react-cookie';
+const SERVER = "http://localhost:5000";
 const ProfileScreen = ({ history }) => {
   const [cookies, ] = useCookies(['user']);
     return (
