@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Channel = ({id,name,participants,onClick}) =>{
+const Channel = ({id,name,description,onClick}) =>{
     const isClicked = () =>{
-        onClick(id,name)
+        onClick(id,name, description)
     }
     return(
         <div className="channel-item" onClick={isClicked}>

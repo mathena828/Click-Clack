@@ -3,7 +3,6 @@ var seeder = require('mongoose-seed');
 
 const seedDB = () => {
     seeder.connect('mongodb://localhost:27017/clickclack', function () {
-
         // Load Mongoose models
         seeder.loadModels([
             'models/User.js',

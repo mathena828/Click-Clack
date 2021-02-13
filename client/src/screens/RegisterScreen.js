@@ -8,6 +8,7 @@ const server = "http://localhost:5000";
 
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
+  const [isTeacher, setIsTeacher] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
@@ -16,12 +17,17 @@ const RegisterScreen = ({ history }) => {
   const [error, setError] = useState("");
   const [, setCookie] = useCookies(['user']);
 
+  function handleTeacherClick(){
+    setIsTeacher(true);
+  }
+  function handleStudentClick(){
+    setIsTeacher(false);
+  }
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
       history.push("/");
     }
   }, [history]);
-
   const registerHandler = async (e) => {
     e.preventDefault();
     const config = {
@@ -38,7 +44,8 @@ const RegisterScreen = ({ history }) => {
           password,
           bio,
           school,
-          country
+          country,
+          isTeacher
         },
         config
       );
@@ -70,6 +77,12 @@ const RegisterScreen = ({ history }) => {
           {error}
       </Alert> }
       <Form onSubmit={registerHandler}>
+        <div style={{textAlign:"center"}}>
+        <Form.Group>
+          <Form.Label><h5>I am a...</h5></Form.Label> <br/>
+          <Button onClick={handleTeacherClick} variant={isTeacher ? "secondary" : "light"}>Teacher</Button>{"   "}<Button onClick={handleStudentClick} variant={isTeacher ? "light" : "secondary"}>Student</Button>
+        </Form.Group>
+        </div>
         <Form.Group>
           <Form.Label>Username</Form.Label>
           <Form.Control type="text" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}

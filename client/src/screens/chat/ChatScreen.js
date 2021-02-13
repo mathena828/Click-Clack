@@ -43,6 +43,7 @@ const ChatScreen = ()=> {
             userName: cookies.user.username,
             content: text,
             channelId: channel_id,
+            school: cookies.user.school
         } 
         //socket.emit('send-message', { channel_id, text, senderName: socket.id, id: Date.now() });
         fetch(SERVER+'/api/chat/channels/'+channel_id,{
@@ -53,13 +54,13 @@ const ChatScreen = ()=> {
             body: JSON.stringify(body)
         });
     }
-    const handleChannelSelect = (id, name) => {
+    const handleChannelSelect = (id, name, description) => {
         console.log("Joined channel", id);
         fetch(SERVER+'/api/chat/channels/'+id).then(async response=>{
             let data = await response.json();
             setMessages(data.messages);
             console.log(data.messages);
-            setChannel({id,name})
+            setChannel({id,name, description})
             socket.emit('getChannel',{channelId:id})
             //setChannels(data.channels)
         });     
