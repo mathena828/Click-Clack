@@ -15,6 +15,13 @@ Welcome to Click Clack! 👋 Click Clack is an instant messaging and social medi
 ## Usage
 A user can register as either a Teacher or a Student. Teachers can join and create channels wherein their students can interact with one another, while students can join existing channels with the invite codes provided by their teachers.
 
+After seeding the database:
+    * Login as a STUDENT with the following credentials: 
+        * Email: juandelacruz@upis.edu.ph
+        * Password: juandelacruz
+    * Login as a TEACHER with the following credentials:
+        * Email: teachermathena@ism.edu.es
+        * Password: teacher_mathena
 ### Profile
 The profile page shows users' information. On this page, you can join and create channels depending on wether you are a student or a teacher. Students can also review the Community Guidelines here.
 
