@@ -1,0 +1,8 @@
+{
+  "short_name": "Click Clack",
+  "name": "Hack 2021",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

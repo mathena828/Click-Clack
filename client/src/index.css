@@ -1,0 +1,117 @@
+html, body {
+    font-family: 'Lato',  sans-serif;
+    height:100%;
+    background-color: #f4f4f8;
+}
+
+.orange-text {
+    color: #fcb940;
+}
+
+mark {
+    background-color: #fcb940;
+}
+
+.underline-white {
+    border-bottom: 4px solid #fff;
+}
+
+.underline-white-2 {
+    border-bottom: 2px solid #fff;
+}
+
+.underline-black {
+    border-bottom: 2px solid #000;
+}
+
+h1 {
+    font-family: 'Montserrat',  sans-serif;
+    font-weight: 700;  
+}
+
+textarea { 
+    resize:none; 
+    height: 5em !important;
+}
+
+.form-control {
+    border-radius: 0rem !important;
+    border-left: 0.5rem solid #29b7ca !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+}
+
+select {
+    background-image:
+    linear-gradient(45deg, transparent 50%, #29b7ca 60%),
+    linear-gradient(135deg, #29b7ca 40%, transparent 50%) !important;
+    background-position:
+    calc(100% - 30px) 14px,
+    calc(100% - 20px) 14px,
+    100% 0;
+    background-size:
+    10px 10px,
+    10px 10px;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.alert-danger {
+    background-color: #fe4b48;
+    color: white;
+}
+
+.alert-success {
+    background-color: #2fc890;
+    color: white;
+}
+
+/* Navigation Bar */
+.nav-link, .btn {
+    font-family: 'Montserrat',  sans-serif;
+    font-weight: 600 !important;  
+}
+
+.navbar-brand {
+    font-family: 'Montserrat',  sans-serif;
+    font-weight: 700;
+}
+
+/* Home */
+
+.home-bottom {
+    background-color: #29b7ca;
+}
+
+.description, .subtext {
+    line-height: 30px;
+}
+
+.description-intro {
+    color: white;
+    font-weight: 600; 
+}
+
+/* Profile */
+
+.new-channel-input {
+    border-left: 0.5rem solid #fcb940 !important;
+}
+
+.join-card-header {
+    background-color: #29b7ca;
+    color: white;
+    font-family: 'Montserrat',  sans-serif;
+}
+
+.create-header {
+    background-color: #343b3f;
+    color: white;
+    font-family: 'Montserrat',  sans-serif;
+}
+
+.join-card-body {
+    background-color: #f4f4f8;
+}
