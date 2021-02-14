@@ -8,7 +8,6 @@ import HomeScreen from "./screens/HomeScreen"
 import ChatScreen from "./screens/chat/ChatScreen"
 import ProfileScreen from "./screens/ProfileScreen"
 import NavigationBar from "./components/NavigationBar"
-import JoinScreen from "./screens/JoinScreen";
 
 const App = () => {
   return (
