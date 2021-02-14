@@ -88,6 +88,7 @@ const JoinScreen = () => {
           }, 5000);
         }
       });
+      setFormChannel("");
     } catch (error) {
       if (error.response.data || error.response) {
         setError(error.response.data.error);
