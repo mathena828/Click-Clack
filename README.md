@@ -2,7 +2,7 @@
 
 Welcome to Click Clack! 👋 
 
-Click Clack is an instant messaging and social media application designed to make online learning more immersive and engaging for students around the world. Our purpose is to encourage students to broaden their horizons through active dialogue. This is facilitated in a safe environment supervised by their instructors. Students can connect with an international community of learners and educators, explore new perspectives, and share ideas with other students.
+Click Clack is an instant messaging and social media application designed to make online learning more inclusive and immersive for students around the world. Our purpose is to encourage students to broaden their horizons through active dialogue. This is facilitated in a safe environment supervised by their instructors. Remote learning presents a great opportunity to encourage diversity in the classroom. Students can connect with an international community of learners and educators, explore new perspectives, and share ideas with other students.
 
 ## Install Dependencies
 1. Make sure you have the following **prerequisites** installed.
@@ -27,7 +27,7 @@ After seeding the database, you can use some of the existing accounts with the f
      * Password: juandelacruz
   - Jane Doe 
      * Email: janedoe@ism.edu.es
-     * Password: janedo
+     * Password: janedoe
 - Login as a TEACHER with the following credentials:
    - Mathena Angeles
      * Email: teachermathena@ism.edu.es
